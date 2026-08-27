@@ -90,6 +90,41 @@
   .nav-links li + li{margin-left:48px;}
   .nav-links a:hover{opacity:1; border-color:#fff;}
   .nav-toggle{display:none;}
+  .nav-links li.has-dropdown{position:relative;}
+  .nav-parent{
+    color:#fff; text-decoration:none; font-family:'Inter', sans-serif;
+    font-size:1.17rem; letter-spacing:.08em; text-transform:uppercase;
+    opacity:.85; display:inline-flex; align-items:center; gap:6px;
+    border-bottom:1px solid transparent; padding-bottom:2px;
+    cursor:default; user-select:none; white-space:nowrap;
+  }
+  .nav-links li.has-dropdown:hover .nav-parent,
+  .nav-links li.has-dropdown:focus-within .nav-parent{opacity:1; border-color:#fff;}
+  .nav-caret{
+    width:7px; height:7px; margin-top:-3px;
+    border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor;
+    transform:rotate(45deg); transition:transform .2s ease; flex-shrink:0;
+  }
+  .nav-links li.has-dropdown:hover .nav-caret,
+  .nav-links li.has-dropdown:focus-within .nav-caret{transform:rotate(225deg); margin-top:3px;}
+  .nav-dropdown{
+    list-style:none; margin:0; padding:14px 0 10px; position:absolute;
+    top:100%; left:0;
+    background:var(--pine); min-width:220px;
+    box-shadow:0 14px 32px rgba(0,0,0,.28);
+    opacity:0; pointer-events:none;
+    transition:opacity .18s ease;
+    z-index:40;
+  }
+  .nav-links li.has-dropdown:hover .nav-dropdown,
+  .nav-links li.has-dropdown:focus-within .nav-dropdown{opacity:1; pointer-events:auto;}
+  .nav-dropdown li{margin:0 !important;}
+  .nav-dropdown a{
+    display:block; padding:10px 24px;
+    font-size:.98rem; letter-spacing:.04em; text-transform:none;
+    white-space:nowrap; opacity:.85; border:none;
+  }
+  .nav-dropdown a:hover{opacity:1; background:rgba(255,255,255,.08);}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -555,6 +590,15 @@
     .nav-toggle.open::before{transform:translateY(9px) rotate(45deg);}
     .nav-toggle.open::after{transform:translateY(-9px) rotate(-45deg);}
     .nav-toggle.open span{opacity:0;}
+    .nav-links li.has-dropdown{position:static;}
+    .nav-caret{display:none;}
+    .nav-dropdown{
+      position:static; opacity:1; pointer-events:auto;
+      background:transparent; box-shadow:none; min-width:0;
+      padding:6px 0 0 16px; margin:0;
+      border-left:1px solid rgba(255,255,255,.25);
+    }
+    .nav-dropdown a{padding:10px 0; font-size:.95rem;}
 
     .about-grid, .contact-grid{grid-template-columns:1fr; gap:34px;}
     .team-list-grid{grid-template-columns:repeat(2, 1fr);}
@@ -580,6 +624,15 @@
     Kyndil
   </a>
   <ul class="nav-links" id="navLinks">
+    <li class="has-dropdown">
+      <span class="nav-parent">Felagið<span class="nav-caret"></span></span>
+      <ul class="nav-dropdown">
+        <li><a href="nevndin.html">Nevndin</a></li>
+        <li><a href="tryggingar.html">Tryggingar</a></li>
+        <li><a href="limagjald.html">Limagjald</a></li>
+        <li><a href="hjalpa.html">Hug at hjálpa til?</a></li>
+      </ul>
+    </li>
     <li><a href="lid.html">Lið</a></li>
     <li><a href="venjingartidir.html">Venjingartíðir</a></li>
     <li><a href="kappingar.html">Kappingar</a></li>
