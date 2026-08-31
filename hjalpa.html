@@ -737,6 +737,54 @@
     .info-cols{grid-template-columns:1fr;}
   }
 
+  /* ---------- KUNNING: HUG AT HJALPA (formular) ---------- */
+  .volunteer-form-wrap{margin-top:64px; max-width:640px;}
+  .volunteer-form-wrap h3{
+    font-family:'Fraunces', serif;
+    font-size:clamp(1.5rem, 3vw, 2rem);
+    text-transform:uppercase;
+    color:var(--pine);
+    margin-bottom:20px;
+  }
+  .volunteer-form{display:flex; flex-direction:column; gap:22px; margin-top:8px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .form-group{display:flex; flex-direction:column; gap:8px;}
+  .form-group label{
+    font-family:'Inter', sans-serif;
+    font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--pitch); font-weight:600;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="tel"],
+  .form-group textarea{
+    font-family:'Inter', sans-serif;
+    font-size:1rem;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--ink);
+    border-radius:2px;
+  }
+  .form-group input:focus, .form-group textarea:focus{outline:2px solid var(--pitch); outline-offset:1px;}
+  .form-group textarea{resize:vertical; min-height:110px; font-family:'Inter', sans-serif;}
+  .form-checks{display:flex; flex-direction:column; gap:10px; margin-top:2px;}
+  .form-checks label{
+    font-family:'Inter', sans-serif; font-size:.95rem; color:#2c3b34;
+    display:flex; align-items:center; gap:10px;
+    text-transform:none; letter-spacing:normal; font-weight:400;
+  }
+  .form-checks input[type="checkbox"]{width:18px; height:18px; accent-color:var(--pitch);}
+  .volunteer-form .btn{align-self:flex-start; cursor:pointer; border:none;}
+  .form-status{margin:0; font-size:.9rem; min-height:1.2em;}
+  .form-status--ok{color:var(--pitch); font-weight:600;}
+  .form-status--error{color:#b3261e; font-weight:600;}
+  .form-honey{position:absolute; left:-9999px; opacity:0;}
+
+  @media (max-width: 640px){
+    .form-row{grid-template-columns:1fr;}
+  }
+
   /* ---------- KAPPINGAR: next match + badges ---------- */
   .next-match-hero{
     background:var(--pine);
@@ -829,8 +877,46 @@
     <div class="history-article reveal">
       <p>Kyndil er eitt sjálvbodið felag, og alt tað, ið hendir á og uttanfyri vøllin – venjingar, kappingar, stevnur og dagligt starv – er borið uppi av fólki, ið gevur av síni frítíð. Tí er altíð brúk fyri fleiri hondum, hvørt tað so er ein heilan sesong ella bara eina einstaka løtu.</p>
       <p>Tú kanst hjálpa til á nógvar mátar – til dømis sum treinari ella hjálpartreinari, sum dómari ella tíðtakari til kappingar, við at koyra hold til dystir, við at hjálpa til við stevnum og tiltøkum, ella við at leggja hond á, tá høllin og økið uttanfyri skulu haldast við líka.</p>
-      <p>Er tú áhugað í at leggja tína orku í Kyndil – sama hvat konar hjálp tú hevur í huganum – so tak endiliga kontakt við nevndina. Vit taka fegin ímóti allari hjálp og vísa tær, hvar tørvurin er størstur beint nú.</p>
+      <p>Er tú áhugað í at leggja tína orku í Kyndil – sama hvat konar hjálp tú hevur í huganum – so fyll út formularin niðanfyri, ella tak beinleiðis kontakt við nevndina. Vit taka fegin ímóti allari hjálp og vísa tær, hvar tørvurin er størstur beint nú.</p>
       <p><a href="mailto:kyndil1956@gmail.com" style="color:var(--pitch); font-weight:600;">kyndil1956@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+298213624" style="color:var(--pitch); font-weight:600;">+298 21 36 24</a></p>
+    </div>
+
+    <div class="volunteer-form-wrap reveal">
+      <h3>Send boð til nevndina</h3>
+      <form class="volunteer-form" id="volunteerForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="v-name">Navn</label>
+            <input type="text" id="v-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="form-group">
+            <label for="v-email">Teldupostur</label>
+            <input type="email" id="v-email" name="email" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="v-phone">Telefonnummar (valfrítt)</label>
+          <input type="tel" id="v-phone" name="phone" autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label>Hvat hevur tú hug at hjálpa við?</label>
+          <div class="form-checks">
+            <label><input type="checkbox" name="hjalp[]" value="Treinari / hjálpartreinari"> Treinari / hjálpartreinari</label>
+            <label><input type="checkbox" name="hjalp[]" value="Dómari / tíðtakari"> Dómari / tíðtakari</label>
+            <label><input type="checkbox" name="hjalp[]" value="Koyring til dystir"> Koyring til dystir</label>
+            <label><input type="checkbox" name="hjalp[]" value="Hjálp við stevnum og tiltøkum"> Hjálp við stevnum og tiltøkum</label>
+            <label><input type="checkbox" name="hjalp[]" value="Viðlíkahald av vølli og høll"> Viðlíkahald av vølli og høll</label>
+            <label><input type="checkbox" name="hjalp[]" value="Annað"> Annað</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="v-message">Boð (valfrítt)</label>
+          <textarea id="v-message" name="message" rows="4"></textarea>
+        </div>
+        <input type="text" name="_honey" class="form-honey" tabindex="-1" autocomplete="off">
+        <button type="submit" class="btn btn-solid">Send boð</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -872,6 +958,36 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  const volunteerForm = document.getElementById('volunteerForm');
+  if (volunteerForm) {
+    volunteerForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const status = document.getElementById('formStatus');
+      const btn = volunteerForm.querySelector('button[type="submit"]');
+      const data = new FormData(volunteerForm);
+      data.append('_subject', 'Nýtt boð um at hjálpa til – Kyndil.fo');
+      btn.disabled = true;
+      status.className = 'form-status';
+      status.textContent = 'Sendir...';
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/kyndil1956@gmail.com', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: data
+        });
+        if (!res.ok) throw new Error('send failed');
+        volunteerForm.reset();
+        status.textContent = 'Takk fyri! Boðið er sent, og nevndin fer at seta seg í samband.';
+        status.classList.add('form-status--ok');
+      } catch (err) {
+        status.textContent = 'Okkurt fór skeivt. Skriva heldur beinleiðis til kyndil1956@gmail.com.';
+        status.classList.add('form-status--error');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
 
   </script>
 
