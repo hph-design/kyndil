@@ -677,6 +677,35 @@
   }
   .fee-pending-box p{margin:0; color:#4b5a52; font-size:.95rem;}
   .fee-pending-box p a{color:var(--pitch); font-weight:600;}
+  .fee-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:8px;
+  }
+  .fee-card{
+    background:#fff;
+    padding:24px 22px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .fee-age{
+    font-family:'Inter', sans-serif;
+    font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--pitch); font-weight:600;
+  }
+  .fee-amount{
+    font-family:'Fraunces', serif;
+    font-size:1.5rem; font-weight:700; text-transform:none;
+    color:var(--pine);
+  }
+  .fee-teams{
+    font-family:'Inter', sans-serif;
+    font-size:.85rem; color:#4b5a52;
+  }
+  .fee-note{margin-top:30px; color:#4b5a52; font-size:.95rem;}
+  .fee-note a{color:var(--pitch); font-weight:600;}
 
   /* ---------- KUNNING: FORELDUR / TRYGGING ---------- */
   .info-sub{margin-top:64px;}
@@ -828,11 +857,52 @@
     </div>
     <div class="fee-text reveal" style="max-width:640px;">
       <p class="reveal">Limagjaldið er grundstoytturin undir Kyndli og er við til at gera tað møguligt hjá øllum bólkum – frá teimum yngstu upp til teir vaksnu – at venja og kappast, at halda vøllin og høllina við líka, og at útstyra hold við bóltum, treyjum og øðrum neyðugum útgerð.</p>
-      <p class="reveal">Sjálvt gjaldið broytir seg eftir aldri og hvørjum bólki børnini ella tey ungu eru við í. Tak kontakt við nevndina, um tú vil vita, hvat gjaldið er hjá tíni fjølskyldu, ella um tú hevur spurningar um gjaldsmátar.</p>
+      <p class="reveal">Upphæddin er sett fyri hvønn aldursbólk fyri seg og gjaldast eitt sinn um árið (frá september til mai). Er meira enn eitt barn úr sama húsarhaldi limur í Kyndli, er 20% avsláttur á limagjaldinum. Yvirlitið niðanfyri vísir, hvat limagjaldið er fyri hvønn bólk.</p>
     </div>
-    <div class="fee-pending-box reveal">
-      <strong>Nágreiniligar upphæddir koma skjótt</strong>
-      <p>Vit arbeiða við at fáa alla kunning um limagjald sett saman her á síðuni. Fram til tá kanst tú skriva til <a href="mailto:kyndil1956@gmail.com">kyndil1956@gmail.com</a> ella ringja <a href="tel:+298213624">+298 21 36 24</a>, so hjálpir nevndin tær vegleiðis.</p>
+    <div class="fee-grid reveal">
+      <div class="fee-card">
+        <span class="fee-age">U6 – Mini hondbóltur</span>
+        <span class="fee-amount">600 kr. um árið</span>
+        <span class="fee-teams">U6 – mini hondbóltur</span>
+      </div>
+      <div class="fee-card">
+        <span class="fee-age">U8</span>
+        <span class="fee-amount">1.000 kr. um árið</span>
+        <span class="fee-teams">D7 · D8 · G8</span>
+      </div>
+      <div class="fee-card">
+        <span class="fee-age">U10</span>
+        <span class="fee-amount">1.500 kr. um árið</span>
+        <span class="fee-teams">D10 · G9 · G10</span>
+      </div>
+      <div class="fee-card">
+        <span class="fee-age">U12</span>
+        <span class="fee-amount">1.700 kr. um árið</span>
+        <span class="fee-teams">D12 · G12</span>
+      </div>
+      <div class="fee-card">
+        <span class="fee-age">U14–U16</span>
+        <span class="fee-amount">2.000 kr. um árið</span>
+        <span class="fee-teams">D14 · D16 · G14 · G16</span>
+      </div>
+      <div class="fee-card">
+        <span class="fee-age">U18 – Vaksin</span>
+        <span class="fee-amount">2.200 kr. um árið</span>
+        <span class="fee-teams">1. Deild Menn · 1. Deild Kvinnur · Burn Menn · D18 · G18 · SMS</span>
+      </div>
+      <div class="fee-card">
+        <span class="fee-age">Hondbóltsfitness</span>
+        <span class="fee-amount">800 kr. um árið</span>
+        <span class="fee-teams">Fyri vaksin, ið vilja venja fitness-hondbólt</span>
+      </div>
+      <div class="fee-card">
+        <span class="fee-age">Hvílandi limur</span>
+        <span class="fee-amount">600 kr. um árið</span>
+        <span class="fee-teams">Fyri limir, ið ikki venja virkin, men vilja halda uppat felagnum</span>
+      </div>
+    </div>
+    <div class="fee-note reveal">
+      <p>Treinarar eru sjálvkravdir undantiknir kontingenti á sínum egna holdi. Upphæddirnar omanfyri eru vegleiðandi og kunnu broytast – skriva til <a href="mailto:kyndil1956@gmail.com">kyndil1956@gmail.com</a> ella ringja <a href="tel:+298213624">+298 21 36 24</a>, um tú hevur spurningar um gjaldsmátar ella tíni egnu viðurskifti.</p>
     </div>
   </div>
 </section>
