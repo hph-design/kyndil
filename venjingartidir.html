@@ -802,6 +802,40 @@
     font-weight:700; font-size:1.3rem; text-transform:uppercase;
     color:var(--pine); margin-bottom:18px;
   }
+
+  /* ---------- VENJINGARTÍÐIR: høvuðsvenjarar ---------- */
+  .coaches-block{margin-top:56px;}
+  .coaches-title{
+    font-family:'Fraunces', serif;
+    font-weight:700; font-size:1.3rem; text-transform:uppercase;
+    color:var(--pine); margin-bottom:18px;
+  }
+  .coach-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .coach-card{
+    background:#fff;
+    padding:20px 22px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .coach-team{
+    font-family:'Inter', sans-serif;
+    font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--pitch); font-weight:600;
+  }
+  .coach-person{display:flex; flex-direction:column;}
+  .coach-name{
+    font-family:'Fraunces', serif;
+    font-size:1.05rem; font-weight:600; text-transform:none;
+    color:var(--pine);
+  }
+  .coach-phone{font-size:.82rem; color:#5b6a62;}
+  .coach-phone a{color:#5b6a62;}
+  .coaches-note{margin-top:24px; color:#4b5a52; font-size:.95rem;}
 </style>
 </head>
 <body>
@@ -835,7 +869,7 @@
     </div>
     <p class="teams-teaser-text reveal">Vel títt hold, og sí hvar og hvørja tíð tit venja.</p>
 
-    <div class="standings-tabs reveal" id="teamTabs" role="tablist">
+        <div class="standings-tabs reveal" id="teamTabs" role="tablist">
       <button type="button" class="standings-tab is-active" data-team="u6-mini-hondb-ltur" role="tab" aria-selected="true">U6/Mini Hondbóltur</button>
       <button type="button" class="standings-tab" data-team="d8" role="tab" aria-selected="false">D8</button>
       <button type="button" class="standings-tab" data-team="g8" role="tab" aria-selected="false">G8</button>
@@ -857,9 +891,7 @@
       <button type="button" class="standings-tab" data-team="d11" role="tab" aria-selected="false">D11</button>
       <button type="button" class="standings-tab" data-team="d7" role="tab" aria-selected="false">D7</button>
       <button type="button" class="standings-tab" data-team="m-lmandsvenjing" role="tab" aria-selected="false">Málmannavenjing</button>
-      <button type="button" class="standings-tab" data-team="kyndil-generelt" role="tab" aria-selected="false">Kyndil (alment)</button>
       <button type="button" class="standings-tab" data-team="9-10-kyndil" role="tab" aria-selected="false">9-10 Kyndil</button>
-      <button type="button" class="standings-tab" data-team="9-12-kyndil" role="tab" aria-selected="false">9-12 Kyndil</button>
     </div>
 
     <div class="standings-block reveal" id="teamSchedulePanels">
@@ -872,6 +904,16 @@
             <tr>
               <td>Mikudag</td>
               <td>16:30 – 17:30</td>
+              <td>Hálsi 1</td>
+            </tr>
+            <tr>
+              <td>Sunnudag</td>
+              <td>09:00 – 10:00</td>
+              <td>Hálsi 1</td>
+            </tr>
+            <tr>
+              <td>Sunnudag</td>
+              <td>10:00 – 11:30</td>
               <td>Hálsi 1</td>
             </tr>
             </tbody>
@@ -932,7 +974,7 @@
             <tr>
               <td>Hósdag</td>
               <td>14:00 – 15:00</td>
-              <td>Gundadalshøllin</td>
+              <td>Hálsi 1</td>
             </tr>
             <tr>
               <td>Fríggjadag</td>
@@ -958,6 +1000,11 @@
               <td>Mikudag</td>
               <td>15:30 – 16:30</td>
               <td>Hálsi 1</td>
+            </tr>
+            <tr>
+              <td>Hósdag</td>
+              <td>14:00 – 15:00</td>
+              <td>Gundadalshøllin</td>
             </tr>
             <tr>
               <td>Fríggjadag</td>
@@ -1002,11 +1049,16 @@
             <tr>
               <td>Týsdag</td>
               <td>14:00 – 15:30</td>
+              <td>Hálsi 1</td>
+            </tr>
+            <tr>
+              <td>Hósdag</td>
+              <td>14:00 – 15:00</td>
               <td>Gundadalshøllin</td>
             </tr>
             <tr>
               <td>Hósdag</td>
-              <td>16:00 – 17:00</td>
+              <td>16:30 – 17:30</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
@@ -1026,17 +1078,17 @@
             <tbody>
             <tr>
               <td>Mánadag</td>
-              <td>18:30 – 19:30</td>
+              <td>17:00 – 18:00</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
               <td>Týsdag</td>
-              <td>14:30 – 16:00</td>
+              <td>18:30 – 19:30</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
               <td>Hósdag</td>
-              <td>18:30 – 19:30</td>
+              <td>15:00 – 16:30</td>
               <td>Hálsi 1</td>
             </tr>
             </tbody>
@@ -1056,12 +1108,12 @@
             </tr>
             <tr>
               <td>Týsdag</td>
-              <td>16:00 – 17:30</td>
+              <td>15:30 – 17:00</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
               <td>Hósdag</td>
-              <td>14:30 – 16:00</td>
+              <td>19:00 – 20:00</td>
               <td>Hálsi 1</td>
             </tr>
             </tbody>
@@ -1081,7 +1133,7 @@
             </tr>
             <tr>
               <td>Fríggjadag</td>
-              <td>19:00 – 21:00</td>
+              <td>19:30 – 21:00</td>
               <td>Hálsi 1</td>
             </tr>
             </tbody>
@@ -1131,7 +1183,7 @@
             </tr>
             <tr>
               <td>Fríggjadag</td>
-              <td>19:00 – 21:00</td>
+              <td>19:30 – 21:00</td>
               <td>Hálsi 1</td>
             </tr>
             </tbody>
@@ -1166,12 +1218,12 @@
             <tbody>
             <tr>
               <td>Mánadag</td>
-              <td>17:00 – 18:30</td>
+              <td>18:00 – 19:30</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
               <td>Týsdag</td>
-              <td>19:00 – 21:00</td>
+              <td>19:30 – 21:00</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
@@ -1186,17 +1238,17 @@
             </tr>
             <tr>
               <td>Hósdag</td>
-              <td>19:30 – 21:30</td>
+              <td>20:00 – 22:00</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
               <td>Fríggjadag</td>
-              <td>18:00 – 19:00</td>
+              <td>18:00 – 19:30</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
               <td>Fríggjadag</td>
-              <td>19:00 – 21:00</td>
+              <td>19:30 – 21:00</td>
               <td>Hálsi 1</td>
             </tr>
             </tbody>
@@ -1216,12 +1268,12 @@
             </tr>
             <tr>
               <td>Týsdag</td>
-              <td>17:30 – 19:00</td>
+              <td>17:00 – 18:30</td>
               <td>Hálsi 1</td>
             </tr>
             <tr>
               <td>Hósdag</td>
-              <td>17:00 – 18:30</td>
+              <td>17:30 – 19:00</td>
               <td>Hálsi 1</td>
             </tr>
             </tbody>
@@ -1258,6 +1310,11 @@
               <td>21:00 – 22:00</td>
               <td>Hálsi 1</td>
             </tr>
+            <tr>
+              <td>Sunnudag</td>
+              <td>11:30 – 12:30</td>
+              <td>Hálsi 1</td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -1288,6 +1345,11 @@
               <td>17:00 – 18:00</td>
               <td>Á Fløtum</td>
             </tr>
+            <tr>
+              <td>Hósdag</td>
+              <td>15:00 – 16:30</td>
+              <td>Gundadalshøllin</td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -1300,23 +1362,13 @@
             <tbody>
             <tr>
               <td>Mikudag</td>
-              <td>17:30 – 18:30</td>
-              <td>Hálsi 1</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="team-schedule-panel" id="panel-kyndil-generelt" style="display:none;">
-        <div class="team-schedule-heading">Kyndil (alment)</div>
-        <div class="standings-wrap">
-          <table class="standings-table">
-            <thead><tr><th>Dagur</th><th>Tíð</th><th>Høll</th></tr></thead>
-            <tbody>
-            <tr>
-              <td>Mikudag</td>
               <td>14:00 – 15:30</td>
               <td>Gundadalshøllin</td>
+            </tr>
+            <tr>
+              <td>Mikudag</td>
+              <td>17:30 – 18:30</td>
+              <td>Hálsi 1</td>
             </tr>
             </tbody>
           </table>
@@ -1330,26 +1382,155 @@
             <tbody>
             <tr>
               <td>Leygardag</td>
-              <td>14:00 – 14:30</td>
+              <td>09:00 – 10:00</td>
               <td>Hálsi 1</td>
             </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="team-schedule-panel" id="panel-9-12-kyndil" style="display:none;">
-        <div class="team-schedule-heading">9-12 Kyndil</div>
-        <div class="standings-wrap">
-          <table class="standings-table">
-            <thead><tr><th>Dagur</th><th>Tíð</th><th>Høll</th></tr></thead>
-            <tbody>
-            <tr>
-              <td>Sunnudag</td>
-              <td>14:00 – 14:30</td>
-              <td>Hálsi 1</td>
-            </tr>
-            </tbody>
-          </table>
+    </div>  
+    <div class="coaches-block reveal">
+      <span class="eyebrow" style="color:var(--pitch); display:block; margin-bottom:14px;">Venjarar</span>
+      <h2 class="coaches-title">Høvuðsvenjarar</h2>
+      <p class="teams-teaser-text">Høvuðsvenjarin fyri hvørt hold, sambært nýggjasta venjingaryvirlitinum.</p>
+      <div class="coach-grid reveal">
+        <div class="coach-card">
+          <span class="coach-team">G8</span>
+          <div class="coach-person">
+            <span class="coach-name">Karinbeth Leonsdóttir Kjærbæk</span>
+            <span class="coach-phone"><a href="tel:+298219445">219445</a></span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">Mira Bendix Laursen</span>
+            <span class="coach-phone"><a href="tel:+298501109">501109</a></span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">Herdis Kjærbæk</span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">Maria Hellisdal</span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">G10</span>
+          <div class="coach-person">
+            <span class="coach-name">Barbara Terjadóttir</span>
+            <span class="coach-phone"><a href="tel:+298277497">277497</a></span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">Birgir Sondum</span>
+            <span class="coach-phone"><a href="tel:+298210298">210298</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">G12</span>
+          <div class="coach-person">
+            <span class="coach-name">Sophus Dal-Christiansen</span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">Fríða Berg</span>
+            <span class="coach-phone"><a href="tel:+298272008">272008</a></span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">Ada Joensen</span>
+            <span class="coach-phone"><a href="tel:+298266992">266992</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">G14</span>
+          <div class="coach-person">
+            <span class="coach-name">Linda av Fløtum</span>
+            <span class="coach-phone"><a href="tel:+298254126">254126</a></span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">Trygvi Askham</span>
+            <span class="coach-phone"><a href="tel:+298790207">790207</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">G16/18</span>
+          <div class="coach-person">
+            <span class="coach-name">Tobias Thisen</span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">James við Brúgv</span>
+            <span class="coach-phone"><a href="tel:+298216617">216617</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">U6</span>
+          <div class="coach-person">
+            <span class="coach-name">Andrias Sólsker</span>
+            <span class="coach-phone"><a href="tel:+298213781">213781</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">D7</span>
+          <div class="coach-person">
+            <span class="coach-name">Niels Andresen</span>
+            <span class="coach-phone"><a href="tel:+298220355">220355</a></span>
+          </div>
+          <div class="coach-person">
+            <span class="coach-name">Óla Hendrik av Fløtum</span>
+            <span class="coach-phone"><a href="tel:+298227057">227057</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">D8</span>
+          <div class="coach-person">
+            <span class="coach-name">Julian Johansen</span>
+            <span class="coach-phone"><a href="tel:+298237450">237450</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">D10</span>
+          <div class="coach-person">
+            <span class="coach-name">Simon Højmark</span>
+            <span class="coach-phone"><a href="tel:+4541250200">+4541250200</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">D12</span>
+          <div class="coach-person">
+            <span class="coach-name">Simon Højmark</span>
+            <span class="coach-phone"><a href="tel:+4541250200">+4541250200</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">D14</span>
+          <div class="coach-person">
+            <span class="coach-name">Tummas Jákup Sørensen</span>
+            <span class="coach-phone"><a href="tel:+298523721">523721</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">D16</span>
+          <div class="coach-person">
+            <span class="coach-name">Sophus Dal-Christiansen</span>
+            <span class="coach-phone"><a href="tel:+298787966">787966</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">D18</span>
+          <div class="coach-person">
+            <span class="coach-name">Jesper Bak</span>
+            <span class="coach-phone"><a href="tel:+4552712806">+45 52712806</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">Høvuðsungdómsvenjari</span>
+          <div class="coach-person">
+            <span class="coach-name">Simon H. Pedersen</span>
+            <span class="coach-phone"><a href="tel:+4541250200">+45 41250200</a></span>
+          </div>
+        </div>
+        <div class="coach-card">
+          <span class="coach-team">Samskipari</span>
+          <div class="coach-person">
+            <span class="coach-name">Angeleen Hellisdal</span>
+            <span class="coach-phone"><a href="tel:+298252040">252040</a></span>
+          </div>
         </div>
       </div>
     </div>
@@ -1415,3 +1596,4 @@
 
 </body>
 </html>
+    
