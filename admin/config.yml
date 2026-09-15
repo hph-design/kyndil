@@ -1,0 +1,71 @@
+# Kyndil — innihaldsstýring (Sveltia CMS)
+#
+# base_url below must be replaced with the Cloudflare Worker URL once it's
+# deployed (see the OAuth setup steps) — until then, sign-in on /admin
+# will not work. Nothing else here needs to change for phase 1.
+
+backend:
+  name: github
+  repo: hph-design/kyndil
+  branch: main
+  base_url: "https://REPLACE-WITH-CLOUDFLARE-WORKER-URL"
+
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+collections:
+  - name: "sponsors"
+    label: "Stuðlar"
+    files:
+      - name: "sponsors"
+        label: "Stuðlar (fyritøkur)"
+        file: "data/sponsors.json"
+        format: "json"
+        fields:
+          - label: "Listi av stuðlum"
+            name: "sponsors"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Navn", name: "name", widget: "string" }
+              - { label: "Logo (mynd)", name: "logo", widget: "image" }
+              - { label: "Breidd (px)", name: "width", widget: "number", value_type: "int" }
+              - { label: "Hædd (px)", name: "height", widget: "number", value_type: "int" }
+              - { label: "Stórt/framhevja logo?", name: "featured", widget: "boolean", default: false }
+              - { label: "Raðfylgja (0 = fremst)", name: "order", widget: "number", value_type: "int" }
+
+  - name: "teams"
+    label: "Bólkar & venjarar"
+    files:
+      - name: "teams"
+        label: "Bólkar & venjarar"
+        file: "data/teams.json"
+        format: "json"
+        fields:
+          - label: "Bólkar"
+            name: "teams"
+            widget: "list"
+            summary: "{{fields.team}} — {{fields.coachName}}"
+            fields:
+              - { label: "Bólkur (bert til kunning — broytir onki)", name: "team", widget: "string" }
+              - { label: "Kenniorð — IKKI BROYT", name: "id", widget: "hidden" }
+              - { label: "Venjari (navn)", name: "coachName", widget: "string", required: false, hint: "Lat standa tómt, um eingin venjari er valdur enn — so stendur \"Kemur skjótt\" á síðuni." }
+
+  - name: "org_roles"
+    label: "Høvuðsrólur"
+    files:
+      - name: "org_roles"
+        label: "Høvuðsungdómsvenjari & Samskipari"
+        file: "data/org_roles.json"
+        format: "json"
+        fields:
+          - label: "Rólur"
+            name: "roles"
+            widget: "list"
+            summary: "{{fields.role}} — {{fields.name}}"
+            fields:
+              - { label: "Rólan (bert til kunning — broytir onki)", name: "role", widget: "string" }
+              - { label: "Kenniorð — IKKI BROYT", name: "id", widget: "hidden" }
+              - { label: "Navn", name: "name", widget: "string" }
+              - { label: "Telefonnummar (sum tað skal sæst)", name: "phoneDisplay", widget: "string" }
+              - { label: "Telefon-leinkja", name: "phoneHref", widget: "string", hint: "Skriva t.d. tel:+298123456 (byrja við tel: og bert tal aftaná, ongar bilir).", pattern: ["^tel:\\+?[0-9]+$", "Má byrja við tel: og so bert tøl"] }
