@@ -1,0 +1,94 @@
+{
+  "teams": [
+    {
+      "id": "u6-mini-hondboltur",
+      "team": "U6/Mini Hondbóltur",
+      "coachName": "Andrias Sólsker"
+    },
+    {
+      "id": "d8",
+      "team": "D8",
+      "coachName": "Julian Johansen"
+    },
+    {
+      "id": "g8",
+      "team": "G8",
+      "coachName": "Karinbeth Leonsdóttir Kjærbæk"
+    },
+    {
+      "id": "d10",
+      "team": "D10",
+      "coachName": "Simon Højmark"
+    },
+    {
+      "id": "g10",
+      "team": "G10",
+      "coachName": "Barbara Terjadóttir"
+    },
+    {
+      "id": "d12",
+      "team": "D12",
+      "coachName": "Simon Højmark"
+    },
+    {
+      "id": "g12",
+      "team": "G12",
+      "coachName": "Sophus Dal-Christiansen"
+    },
+    {
+      "id": "d14",
+      "team": "D14",
+      "coachName": "Tummas Jákup Sørensen"
+    },
+    {
+      "id": "g14",
+      "team": "G14",
+      "coachName": "Linda av Fløtum"
+    },
+    {
+      "id": "d16",
+      "team": "D16",
+      "coachName": "Sophus Dal-Christiansen"
+    },
+    {
+      "id": "g16",
+      "team": "G16",
+      "coachName": "Tobias Thisen"
+    },
+    {
+      "id": "d18",
+      "team": "D18",
+      "coachName": "Jesper Bak"
+    },
+    {
+      "id": "g18",
+      "team": "G18",
+      "coachName": "Tobias Thisen"
+    },
+    {
+      "id": "1-deild-menn",
+      "team": "1. Deild Menn",
+      "coachName": ""
+    },
+    {
+      "id": "2-deild-menn",
+      "team": "2. Deild Menn",
+      "coachName": ""
+    },
+    {
+      "id": "1-deild-kvinnur",
+      "team": "1. Deild Kvinnur",
+      "coachName": ""
+    },
+    {
+      "id": "2-deild-kvinnur",
+      "team": "2. Deild Kvinnur",
+      "coachName": ""
+    },
+    {
+      "id": "hondboltsfitness",
+      "team": "Hondbóltsfitness",
+      "coachName": ""
+    }
+  ]
+}

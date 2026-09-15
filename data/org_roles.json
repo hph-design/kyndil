@@ -1,0 +1,18 @@
+{
+  "roles": [
+    {
+      "id": "hovudsungdomsvenjari",
+      "role": "Høvuðsungdómsvenjari",
+      "name": "Simon H. Pedersen",
+      "phoneDisplay": "+45 41250200",
+      "phoneHref": "tel:+4541250200"
+    },
+    {
+      "id": "samskipari",
+      "role": "Samskipari",
+      "name": "Angeleen Hellisdal",
+      "phoneDisplay": "252040",
+      "phoneHref": "tel:+298252040"
+    }
+  ]
+}

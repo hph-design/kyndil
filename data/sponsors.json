@@ -1,0 +1,132 @@
+{
+  "sponsors": [
+    {
+      "name": "Puma",
+      "logo": "assets/sponsors/puma.png",
+      "width": 600,
+      "height": 352,
+      "featured": true,
+      "order": 0
+    },
+    {
+      "name": "Tasty",
+      "logo": "assets/sponsors/tasty.png",
+      "width": 193,
+      "height": 172,
+      "featured": true,
+      "order": 1
+    },
+    {
+      "name": "FTZ",
+      "logo": "assets/sponsors/ftz.png",
+      "width": 142,
+      "height": 72,
+      "featured": false,
+      "order": 2
+    },
+    {
+      "name": "Articon",
+      "logo": "assets/sponsors/articon.png",
+      "width": 226,
+      "height": 47,
+      "featured": false,
+      "order": 3
+    },
+    {
+      "name": "Balslev",
+      "logo": "assets/sponsors/balslev.png",
+      "width": 244,
+      "height": 85,
+      "featured": false,
+      "order": 4
+    },
+    {
+      "name": "Vestpack",
+      "logo": "assets/sponsors/vestpack.png",
+      "width": 580,
+      "height": 100,
+      "featured": false,
+      "order": 5
+    },
+    {
+      "name": "Tannlæknastovan í Óðinshædd",
+      "logo": "assets/sponsors/tannlaeknastovan-i-odinshaedd.png",
+      "width": 678,
+      "height": 165,
+      "featured": false,
+      "order": 6
+    },
+    {
+      "name": "Faroe Express",
+      "logo": "assets/sponsors/faroe-express.png",
+      "width": 569,
+      "height": 165,
+      "featured": false,
+      "order": 7
+    },
+    {
+      "name": "Løvubetong",
+      "logo": "assets/sponsors/lovubetong.png",
+      "width": 156,
+      "height": 198,
+      "featured": false,
+      "order": 8
+    },
+    {
+      "name": "Tatanka",
+      "logo": "assets/sponsors/tatanka.png",
+      "width": 190,
+      "height": 70,
+      "featured": false,
+      "order": 9
+    },
+    {
+      "name": "Sport24",
+      "logo": "assets/sponsors/sport24.png",
+      "width": 200,
+      "height": 200,
+      "featured": false,
+      "order": 10
+    },
+    {
+      "name": "Betri",
+      "logo": "assets/sponsors/betri.png",
+      "width": 164,
+      "height": 164,
+      "featured": false,
+      "order": 11
+    },
+    {
+      "name": "Nort",
+      "logo": "assets/sponsors/nort.png",
+      "width": 1651,
+      "height": 848,
+      "featured": false,
+      "order": 12
+    },
+    {
+      "name": "Suðuroyar Sparikassi",
+      "logo": "assets/sponsors/suduroyar-sparikassi.png",
+      "width": 438,
+      "height": 130,
+      "featured": false,
+      "order": 13
+    },
+    {
+      "name": "Reyni Service",
+      "logo": "assets/sponsors/reyni-service.png",
+      "width": 339,
+      "height": 60,
+      "featured": false,
+      "order": 14
+    },
+    {
+      "name": "Magn",
+      "logo": "assets/sponsors/magn.png",
+      "width": 578,
+      "height": 172,
+      "featured": false,
+      "order": 15
+    }
+  ]
+}
