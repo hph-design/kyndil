@@ -110,6 +110,44 @@
       });
   }
 
+  // ---------- News feed (tidindi.html) ----------
+  function formatNewsDate(iso) {
+    var months = ["jan", "feb", "mars", "apríl", "mai", "juni", "juli", "august", "sept", "okt", "nov", "des"];
+    var parts = (iso || "").split("-");
+    if (parts.length !== 3) return iso || "";
+    var y = parts[0], m = parseInt(parts[1], 10) - 1, d = parseInt(parts[2], 10);
+    if (!months[m]) return iso;
+    return d + ". " + months[m] + " " + y;
+  }
+
+  function renderNews() {
+    var gridEl = document.getElementById("newsGrid");
+    if (!gridEl) return;
+
+    fetchJson("data/news.json")
+      .then(function (data) {
+        var items = (data && data.news) || [];
+        items.sort(function (a, b) {
+          return (b.date || "") < (a.date || "") ? -1 : (b.date || "") > (a.date || "") ? 1 : 0;
+        });
+
+        var html = "";
+        items.forEach(function (n) {
+          html +=
+            '<a class="link-card" href="' + n.url + '" target="_blank" rel="noopener">' +
+            '<span class="tag">' + formatNewsDate(n.date) + " · " + escapeHtml(n.source) + "</span>" +
+            "<h3>" + escapeHtml(n.title) + "</h3>" +
+            "<p>" + escapeHtml(n.summary) + "</p>" +
+            '<span class="go">Les greinina →</span>' +
+            "</a>\n      ";
+        });
+        gridEl.innerHTML = html;
+      })
+      .catch(function (err) {
+        console.error("[site-data] news:", err);
+      });
+  }
+
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, "&amp;")
@@ -122,5 +160,6 @@
     renderSponsors();
     renderTeamCoaches();
     renderOrgRoles();
+    renderNews();
   });
 })();
