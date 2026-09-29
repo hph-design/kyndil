@@ -69,3 +69,23 @@ collections:
               - { label: "Navn", name: "name", widget: "string" }
               - { label: "Telefonnummar (sum tað skal sæst)", name: "phoneDisplay", widget: "string" }
               - { label: "Telefon-leinkja", name: "phoneHref", widget: "string", hint: "Skriva t.d. tel:+298123456 (byrja við tel: og bert tal aftaná, ongar bilir).", pattern: ["^tel:\\+?[0-9]+$", "Má byrja við tel: og so bert tøl"] }
+
+  - name: "news"
+    label: "Tíðindi"
+    files:
+      - name: "news"
+        label: "Tíðindafeed"
+        file: "data/news.json"
+        format: "json"
+        fields:
+          - label: "Tíðindir"
+            name: "news"
+            widget: "list"
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - { label: "Kenniorð — IKKI BROYT", name: "id", widget: "hidden" }
+              - { label: "Dagfesting", name: "date", widget: "date", format: "YYYY-MM-DD", hint: "Nýggjastu tíðindini sæst fremst." }
+              - { label: "Yvirskrift", name: "title", widget: "string" }
+              - { label: "Kelda (t.d. Roysni.fo)", name: "source", widget: "string" }
+              - { label: "Leinkja til greinina", name: "url", widget: "string" }
+              - { label: "Stutt lýsing (1-2 setningar, sjálvt skrivað - ikki kopiera greinina beint av)", name: "summary", widget: "text" }
