@@ -1,14 +1,15 @@
 # Kyndil — innihaldsstýring (Sveltia CMS)
 #
-# base_url below must be replaced with the Cloudflare Worker URL once it's
-# deployed (see the OAuth setup steps) — until then, sign-in on /admin
-# will not work. Nothing else here needs to change for phase 1.
+# site_domain below must be replaced with the *.netlify.app domain of a free
+# Netlify site once Netlify is set up as the login provider (see the setup
+# guide) — until then, sign-in on /admin will not work. Nothing else here
+# needs to change.
 
 backend:
   name: github
   repo: hph-design/kyndil
   branch: main
-  base_url: "https://REPLACE-WITH-CLOUDFLARE-WORKER-URL"
+  site_domain: "REPLACE-WITH-NETLIFY-SITE-DOMAIN.netlify.app"
 
 media_folder: "assets/uploads"
 public_folder: "assets/uploads"
