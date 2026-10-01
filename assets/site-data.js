@@ -3,7 +3,8 @@
   ---------------------
   Fills in content that can be edited through the /admin CMS without
   touching any HTML: sponsors (index.html), team coaches (lid.html),
-  and the two org-wide coach roles (venjingartidir.html).
+  the two org-wide coach roles (venjingartidir.html), and the list of
+  initiatives (tiltok.html).
 
   Each function is a no-op if the page doesn't have the matching
   container, so this one file can safely be included on every page.
@@ -110,41 +111,30 @@
       });
   }
 
-  // ---------- News feed (tidindi.html) ----------
-  function formatNewsDate(iso) {
-    var months = ["jan", "feb", "mars", "apríl", "mai", "juni", "juli", "august", "sept", "okt", "nov", "des"];
-    var parts = (iso || "").split("-");
-    if (parts.length !== 3) return iso || "";
-    var y = parts[0], m = parseInt(parts[1], 10) - 1, d = parseInt(parts[2], 10);
-    if (!months[m]) return iso;
-    return d + ". " + months[m] + " " + y;
-  }
-
-  function renderNews() {
-    var gridEl = document.getElementById("newsGrid");
+  // ---------- Initiatives (tiltok.html) ----------
+  function renderInitiatives() {
+    var gridEl = document.getElementById("initiativesGrid");
     if (!gridEl) return;
 
-    fetchJson("data/news.json")
+    fetchJson("data/initiatives.json")
       .then(function (data) {
-        var items = (data && data.news) || [];
-        items.sort(function (a, b) {
-          return (b.date || "") < (a.date || "") ? -1 : (b.date || "") > (a.date || "") ? 1 : 0;
-        });
+        var items = (data && data.initiatives) || [];
 
         var html = "";
-        items.forEach(function (n) {
+        items.forEach(function (it) {
+          var isExternal = !!it.external;
+          var attrs = isExternal ? ' target="_blank" rel="noopener"' : "";
           html +=
-            '<a class="link-card" href="' + n.url + '" target="_blank" rel="noopener">' +
-            '<span class="tag">' + formatNewsDate(n.date) + " · " + escapeHtml(n.source) + "</span>" +
-            "<h3>" + escapeHtml(n.title) + "</h3>" +
-            "<p>" + escapeHtml(n.summary) + "</p>" +
-            '<span class="go">Les greinina →</span>' +
+            '<a class="link-card" href="' + it.url + '"' + attrs + ">" +
+            "<h3>" + escapeHtml(it.title) + "</h3>" +
+            "<p>" + escapeHtml(it.description) + "</p>" +
+            '<span class="go">' + (isExternal ? "Lesa meira →" : "Far til síðuna →") + "</span>" +
             "</a>\n      ";
         });
         gridEl.innerHTML = html;
       })
       .catch(function (err) {
-        console.error("[site-data] news:", err);
+        console.error("[site-data] initiatives:", err);
       });
   }
 
@@ -160,6 +150,6 @@
     renderSponsors();
     renderTeamCoaches();
     renderOrgRoles();
-    renderNews();
+    renderInitiatives();
   });
 })();
