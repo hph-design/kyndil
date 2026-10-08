@@ -372,13 +372,38 @@
     border-radius:999px;
     transition:background .15s ease, color .15s ease, border-color .15s ease;
   }
-  .standings-tabs.is-grouped{flex-direction:column; flex-wrap:nowrap; gap:16px;}
-  .tab-group{display:flex; flex-direction:column; gap:8px;}
-  .tab-group-label{
-    font-size:.78rem; font-weight:700; letter-spacing:.08em;
-    text-transform:uppercase; color:#5b6a62;
+  /* Two-step picker: age group (underline tabs) -> team (pills) */
+  .kp-picker{margin-bottom:34px;}
+  .kp-ages{
+    display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;
+    border-bottom:1px solid var(--line); margin-bottom:22px;
+    -webkit-overflow-scrolling:touch;
   }
-  .tab-group-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .kp-ages::-webkit-scrollbar{display:none;}
+  .kp-age{
+    flex:0 0 auto;
+    font-family:'Inter', sans-serif; font-size:.8rem; font-weight:700;
+    letter-spacing:.12em; text-transform:uppercase; white-space:nowrap;
+    padding:14px 22px 15px; margin-bottom:-1px;
+    background:none; border:0; border-bottom:3px solid transparent;
+    color:#6b7a72; cursor:pointer;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .kp-age:hover{color:var(--pine);}
+  .kp-age.is-active{color:var(--pine); border-bottom-color:var(--pitch);}
+  .kp-age:focus-visible, .kp-teams .standings-tab:focus-visible{outline:2px solid var(--pitch); outline-offset:2px;}
+  .kp-teams{display:flex; flex-wrap:wrap; align-items:center; gap:8px;}
+  .kp-teams .standings-tab{
+    font-size:.84rem; font-weight:600; padding:9px 18px;
+    background:rgba(13,59,44,.06); border-color:transparent; color:var(--pine);
+  }
+  .kp-teams .standings-tab:hover{background:rgba(13,59,44,.12); border-color:transparent;}
+  .kp-teams .standings-tab.is-active{background:var(--pine); border-color:var(--pine); color:#fff;}
+  .kp-sep{width:1px; height:22px; background:var(--line); margin:0 8px;}
+  @media (max-width: 600px){
+    .kp-age{padding:12px 16px 13px; font-size:.74rem;}
+    .kp-sep{display:none;}
+  }
   .standings-tab:hover{border-color:var(--pine);}
   .standings-tab.is-active{
     background:var(--pine);
@@ -835,7 +860,7 @@
     <p class="teams-teaser-text reveal">Her kann tú fylgja við hvar títt lið skal spæla næsta dyst.</p>
 
     <div class="standings-title" style="margin-top:8px;">Lið</div>
-    <div class="standings-tabs is-grouped reveal" id="kappingarTabs" role="tablist">
+    <div class="kp-picker reveal" id="kappingarTabs">
       <span class="next-match-empty" style="color:#5b6a62;">Heintar bólkar…</span>
     </div>
 
@@ -1046,8 +1071,49 @@
       renderNextMatch();
     }
 
-    // Build the group tabs from what HSF actually returns for Kyndil, so new
-    // age groups / teams / seasons show up without editing this page.
+    // Build the picker from what HSF actually returns for Kyndil, so new age
+    // groups / teams / seasons show up without editing this page.
+    let sections = [];
+    let agesEl = null, teamsEl = null;
+
+    function setActiveTeam(id){
+      activeGroupId = id;
+      teamsEl.querySelectorAll('.standings-tab').forEach(b => {
+        const on = b.dataset.kgroup === id;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', String(on));
+      });
+    }
+
+    function showSection(sec, preferId){
+      agesEl.querySelectorAll('.kp-age').forEach(b => {
+        const on = b.dataset.age === sec.key;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', String(on));
+        if (on) agesEl.scrollLeft = b.offsetLeft - (agesEl.clientWidth - b.offsetWidth) / 2;
+      });
+      teamsEl.innerHTML = '';
+      let prevGender = null;
+      sec.items.forEach(g => {
+        if (prevGender !== null && g.gender !== prevGender){
+          const sep = document.createElement('span');
+          sep.className = 'kp-sep';
+          sep.setAttribute('aria-hidden', 'true');
+          teamsEl.appendChild(sep);
+        }
+        prevGender = g.gender;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'standings-tab';
+        btn.dataset.kgroup = g.id;
+        btn.setAttribute('role', 'tab');
+        btn.textContent = g.name;
+        teamsEl.appendChild(btn);
+      });
+      const pick = sec.items.find(g => g.id === preferId) || sec.items[0];
+      setActiveTeam(pick.id);
+    }
+
     function buildTabs(){
       const groups = {};
       allMatches.forEach(m => {
@@ -1055,50 +1121,38 @@
         if (!g || !g.name || /test/i.test(m.competitionName || '') || /test/i.test(g.name)) return;
         if (!groups[m.groupId]) groups[m.groupId] = { id: m.groupId, name: g.name, gender: g.gender, ageOrder: (g.age && g.age.order) || 0, ageName: (g.age && g.age.name) || '' };
       });
-      const sections = {};
+      const byAge = {};
       Object.values(groups).forEach(g => {
         const key = g.ageOrder + '|' + g.ageName;
-        (sections[key] = sections[key] || { order: g.ageOrder, label: g.ageOrder === 0 ? 'Vaksin' : g.ageName, items: [] }).items.push(g);
+        (byAge[key] = byAge[key] || { key, order: g.ageOrder, label: g.ageOrder === 0 ? 'Vaksin' : g.ageName, items: [] }).items.push(g);
       });
-      const sectionList = Object.values(sections).sort((a, b) => a.order - b.order);
       const genderRank = x => x === 'male' ? 0 : 1;
       const collator = new Intl.Collator('fo', { numeric: true, sensitivity: 'base' });
+      sections = Object.values(byAge).sort((a, b) => a.order - b.order);
+      sections.forEach(sec => sec.items.sort((a, b) => genderRank(a.gender) - genderRank(b.gender) || collator.compare(a.name, b.name)));
 
       tabsWrap.innerHTML = '';
-      let firstId = null;
-      sectionList.forEach(sec => {
-        sec.items.sort((a, b) => genderRank(a.gender) - genderRank(b.gender) || collator.compare(a.name, b.name));
-        const wrap = document.createElement('div');
-        wrap.className = 'tab-group';
-        const label = document.createElement('span');
-        label.className = 'tab-group-label';
-        label.textContent = sec.label;
-        const row = document.createElement('div');
-        row.className = 'tab-group-row';
-        sec.items.forEach(g => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'standings-tab';
-          btn.dataset.kgroup = g.id;
-          btn.setAttribute('role', 'tab');
-          btn.setAttribute('aria-selected', 'false');
-          btn.textContent = g.name;
-          row.appendChild(btn);
-          if (!firstId) firstId = g.id;
-        });
-        wrap.appendChild(label);
-        wrap.appendChild(row);
-        tabsWrap.appendChild(wrap);
+      agesEl = document.createElement('div');
+      agesEl.className = 'kp-ages';
+      agesEl.setAttribute('role', 'tablist');
+      teamsEl = document.createElement('div');
+      teamsEl.className = 'kp-teams';
+      teamsEl.setAttribute('role', 'tablist');
+      sections.forEach(sec => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'kp-age';
+        b.dataset.age = sec.key;
+        b.setAttribute('role', 'tab');
+        b.textContent = sec.label;
+        agesEl.appendChild(b);
       });
+      tabsWrap.appendChild(agesEl);
+      tabsWrap.appendChild(teamsEl);
 
       // Land on the team the visitor picked last time, otherwise the first one.
-      const saved = tabsWrap.querySelector('.standings-tab[data-kgroup="' + savedGroup + '"]');
-      activeGroupId = saved ? savedGroup : firstId;
-      tabsWrap.querySelectorAll('.standings-tab').forEach(b => {
-        const on = b.dataset.kgroup === activeGroupId;
-        b.classList.toggle('is-active', on);
-        b.setAttribute('aria-selected', String(on));
-      });
+      const start = sections.find(sec => sec.items.some(g => g.id === savedGroup)) || sections[0];
+      showSection(start, savedGroup);
     }
 
     async function loadKappingar(){
@@ -1118,13 +1172,20 @@
     }
 
     tabsWrap.addEventListener('click', e => {
+      const ageBtn = e.target.closest('.kp-age');
+      if (ageBtn){
+        const sec = sections.find(x => x.key === ageBtn.dataset.age);
+        if (sec){
+          showSection(sec);
+          try { localStorage.setItem(STORAGE_KEY, activeGroupId); } catch(err) {}
+          if (allMatches) renderKappingar();
+        }
+        return;
+      }
       const btn = e.target.closest('.standings-tab');
       if (!btn) return;
-      tabsWrap.querySelectorAll('.standings-tab').forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
-      btn.classList.add('is-active');
-      btn.setAttribute('aria-selected', 'true');
-      activeGroupId = btn.dataset.kgroup;
-      try { localStorage.setItem(STORAGE_KEY, activeGroupId); } catch(e) {}
+      setActiveTeam(btn.dataset.kgroup);
+      try { localStorage.setItem(STORAGE_KEY, activeGroupId); } catch(err) {}
       if (allMatches) renderKappingar();
     });
 
