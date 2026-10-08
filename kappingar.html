@@ -1154,7 +1154,7 @@
       teamsEl.innerHTML = '';
       let prevGender = null;
       sec.items.forEach(g => {
-        if (prevGender !== null && g.gender !== prevGender){
+        if (!sec.custom && prevGender !== null && g.gender !== prevGender){
           const sep = document.createElement('span');
           sep.className = 'kp-sep';
           sep.setAttribute('aria-hidden', 'true');
@@ -1177,7 +1177,7 @@
       const groups = {};
       allMatches.forEach(m => {
         const g = m.group;
-        if (!g || !g.name || /test/i.test(m.competitionName || '') || /test/i.test(g.name)) return;
+        if (!g || !g.name || /test/i.test(m.competitionName || '') || /test/i.test(g.name) || /faxe\s*kondi/i.test(g.name) || /faxe\s*kondi/i.test(m.competitionName || '')) return;
         if (!groups[m.groupId]) groups[m.groupId] = { id: m.groupId, name: g.name, gender: g.gender, ageOrder: (g.age && g.age.order) || 0, ageName: (g.age && g.age.name) || '' };
       });
       const byAge = {};
@@ -1188,7 +1188,17 @@
       const genderRank = x => x === 'male' ? 0 : 1;
       const collator = new Intl.Collator('fo', { numeric: true, sensitivity: 'base' });
       sections = Object.values(byAge).sort((a, b) => a.order - b.order);
-      sections.forEach(sec => sec.items.sort((a, b) => genderRank(a.gender) - genderRank(b.gender) || collator.compare(a.name, b.name)));
+      // The senior (Vaksin) tabs follow a fixed order; anything new HSF adds comes after these.
+      const vaksinOrder = ['grundspæl menn', 'grundspæl kvinnur', '1. deild menn', 'lionsbikarið menn', 'lionsbikarið kvinnur'];
+      const vaksinRank = g => { const i = vaksinOrder.indexOf(g.name.trim().toLowerCase()); return i === -1 ? vaksinOrder.length : i; };
+      sections.forEach(sec => {
+        if (sec.order === 0){
+          sec.custom = true;
+          sec.items.sort((a, b) => vaksinRank(a) - vaksinRank(b) || genderRank(a.gender) - genderRank(b.gender) || collator.compare(a.name, b.name));
+        } else {
+          sec.items.sort((a, b) => genderRank(a.gender) - genderRank(b.gender) || collator.compare(a.name, b.name));
+        }
+      });
 
       tabsWrap.innerHTML = '';
       agesEl = document.createElement('div');
