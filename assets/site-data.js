@@ -3,8 +3,7 @@
   ---------------------
   Fills in content that can be edited through the /admin CMS without
   touching any HTML: sponsors (index.html), team coaches (lid.html),
-  the two org-wide coach roles (venjingartidir.html), and the list of
-  initiatives (tiltok.html).
+  and the two org-wide coach roles (venjingartidir.html).
 
   Each function is a no-op if the page doesn't have the matching
   container, so this one file can safely be included on every page.
@@ -111,33 +110,6 @@
       });
   }
 
-  // ---------- Initiatives (tiltok.html) ----------
-  function renderInitiatives() {
-    var gridEl = document.getElementById("initiativesGrid");
-    if (!gridEl) return;
-
-    fetchJson("data/initiatives.json")
-      .then(function (data) {
-        var items = (data && data.initiatives) || [];
-
-        var html = "";
-        items.forEach(function (it) {
-          var isExternal = !!it.external;
-          var attrs = isExternal ? ' target="_blank" rel="noopener"' : "";
-          html +=
-            '<a class="link-card" href="' + it.url + '"' + attrs + ">" +
-            "<h3>" + escapeHtml(it.title) + "</h3>" +
-            "<p>" + escapeHtml(it.description) + "</p>" +
-            '<span class="go">' + (isExternal ? "Lesa meira →" : "Far til síðuna →") + "</span>" +
-            "</a>\n      ";
-        });
-        gridEl.innerHTML = html;
-      })
-      .catch(function (err) {
-        console.error("[site-data] initiatives:", err);
-      });
-  }
-
   function escapeHtml(str) {
     return String(str)
       .replace(/&/g, "&amp;")
@@ -150,6 +122,5 @@
     renderSponsors();
     renderTeamCoaches();
     renderOrgRoles();
-    renderInitiatives();
   });
 })();
