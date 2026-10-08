@@ -818,6 +818,23 @@
   .badge-away{background:rgba(255,255,255,.16); color:#fff;}
   .badge-home.on-light{background:var(--pitch); color:#fff;}
   .badge-away.on-light{background:var(--paper); color:#4b5a52; border:1px solid var(--line);}
+  .kp-score{
+    display:inline-block; margin:0 8px; padding:2px 10px;
+    font-family:'Inter', sans-serif; font-weight:700; font-size:.92rem;
+    letter-spacing:.02em; white-space:nowrap;
+    background:var(--paper); border:1px solid var(--line); border-radius:6px;
+    color:var(--pine);
+  }
+  .kp-res{
+    display:inline-block; margin-left:8px; vertical-align:middle;
+    font-family:'Inter', sans-serif; font-size:.62rem; letter-spacing:.06em;
+    text-transform:uppercase; font-weight:700; padding:3px 9px; border-radius:999px;
+    white-space:nowrap;
+  }
+  .kp-res.win{background:var(--pitch); color:#fff;}
+  .kp-res.loss{background:#f3e4e1; color:#8a3a2c;}
+  .kp-res.draw{background:var(--paper); color:#4b5a52; border:1px solid var(--line);}
+  .kp-pending{margin:0 8px; color:#8a9890; font-size:.8rem; font-style:italic;}
   .btn-ics{
     margin-top:20px;
     display:inline-block;
@@ -1056,6 +1073,32 @@
       `;
     }
 
+    // Final score for a played match, from Kyndil's point of view when Kyndil took part.
+    function matchOutcome(m){
+      const r = m.result;
+      const h = r && r.home && Number(r.home.goalsFor);
+      const a = r && r.away && Number(r.away.goalsFor);
+      if (!r || !Number.isFinite(h) || !Number.isFinite(a) || !r.home || !r.away) return null;
+      let tag = '';
+      const homeIsKyndil = m.homeTeam.clubId === KYNDIL_CLUB_ID;
+      const awayIsKyndil = m.awayTeam.clubId === KYNDIL_CLUB_ID;
+      if (homeIsKyndil || awayIsKyndil){
+        const mine = homeIsKyndil ? h : a, theirs = homeIsKyndil ? a : h;
+        tag = mine > theirs ? '<span class="kp-res win">Sigur</span>'
+            : mine < theirs ? '<span class="kp-res loss">Tap</span>'
+            : '<span class="kp-res draw">Javnt</span>';
+      }
+      return { text: `${h} – ${a}`, tag };
+    }
+
+    function matchCell(m, homeName, awayName){
+      const out = matchOutcome(m);
+      if (out) return `${homeName}<span class="kp-score">${out.text}</span>${awayName}${out.tag}`;
+      const isPast = m.date._seconds * 1000 < Date.now() - 3 * 3600 * 1000;
+      if (isPast) return `${homeName}<span class="kp-pending">Úrslit ikki skrásett enn</span>${awayName}`;
+      return `${homeName} – ${awayName}`;
+    }
+
     function renderKappingar(){
       const list = allMatches
         .filter(m => m.groupId === activeGroupId)
@@ -1076,7 +1119,7 @@
           return `<tr>
             <td>${m.round ?? ''}</td>
             <td>${dayCell}</td>
-            <td>${homeName} – ${awayName}</td>
+            <td>${matchCell(m, homeName, awayName)}</td>
             <td>${homeAwayBadge(m, true)}</td>
             <td>${m.time || ''}</td>
             <td>${(m.venue && m.venue.name) || ''}</td>
