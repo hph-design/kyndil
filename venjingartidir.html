@@ -557,6 +557,17 @@
   }
   .foot-logo{width:42px; height:42px; border-radius:50%;}
   .foot-note{margin-top:20px; opacity:.7; font-family:'Inter', sans-serif; font-size:.72rem; letter-spacing:.04em;}
+  .foot-bottom{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-top:20px;}
+  .foot-bottom .foot-note{margin-top:0;}
+  .foot-social{display:flex; gap:10px;}
+  .foot-social a{
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid rgba(255,255,255,.35);
+    display:inline-flex; align-items:center; justify-content:center;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .foot-social a:hover{background:rgba(255,255,255,.14); border-color:#fff;}
+  .foot-social svg{width:18px; height:18px; fill:#fff;}
 
   @media (max-width: 860px){
     .nav-links{
@@ -1426,7 +1437,13 @@
         <li><a href="https://www.handballstatz.com" target="_blank" rel="noopener">Hagtøl</a></li>
       </ul>
     </div>
-    <div class="foot-note">© <span id="year"></span> Kyndil · Gundadalsvegur 2, 100 Tórshavn</div>
+    <div class="foot-bottom">
+      <div class="foot-note">© <span id="year"></span> Kyndil · Gundadalsvegur 2, 100 Tórshavn</div>
+      <div class="foot-social">
+        <a href="https://www.facebook.com/profile.php?id=100057428530828" target="_blank" rel="noopener" aria-label="Kyndil á Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.25-1.5 1.55-1.5H17V3.7C16.6 3.65 15.5 3.5 14.2 3.5c-2.6 0-4.4 1.6-4.4 4.5v2H7v3.1h2.8V21h3.7z"/></svg></a>
+        <a href="https://www.instagram.com/hondboltsfelagid_kyndil/" target="_blank" rel="noopener" aria-label="Kyndil á Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zM12 2c-2.7 0-3 0-4.1.06-1.1.05-1.8.22-2.5.47a5 5 0 0 0-1.8 1.17 5 5 0 0 0-1.17 1.8c-.25.7-.42 1.4-.47 2.5C2 8.9 2 9.3 2 12s0 3.1.06 4.1c.05 1.1.22 1.8.47 2.5.24.68.6 1.27 1.17 1.8.53.57 1.12.93 1.8 1.17.7.25 1.4.42 2.5.47C9 22 9.3 22 12 22s3.1 0 4.1-.06c1.1-.05 1.8-.22 2.5-.47a5 5 0 0 0 1.8-1.17 5 5 0 0 0 1.17-1.8c.25-.7.42-1.4.47-2.5.06-1 .06-1.3.06-4.1s0-3.1-.06-4.1c-.05-1.1-.22-1.8-.47-2.5a5 5 0 0 0-1.17-1.8 5 5 0 0 0-1.8-1.17c-.7-.25-1.4-.42-2.5-.47C15.1 2 14.7 2 12 2zm0 3.4a5.6 5.6 0 1 1 0 11.2 5.6 5.6 0 0 1 0-11.2zm5.8-.7a1.3 1.3 0 1 1-2.6 0 1.3 1.3 0 0 1 2.6 0z"/></svg></a>
+      </div>
+    </div>
   </div>
 </footer>
 
