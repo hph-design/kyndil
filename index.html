@@ -23,6 +23,7 @@
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  html,body{overflow-x:hidden; overflow-x:clip;}
   body{
     margin:0;
     background:var(--paper);
@@ -517,8 +518,8 @@
   }
 
   /* ---------- FOOTER ---------- */
-  .foot-links{display:flex; list-style:none; margin:0; padding:0;}
-  .foot-links li + li{margin-left:22px;}
+  .foot-links{display:flex; flex-wrap:wrap; gap:10px 22px; list-style:none; margin:0; padding:0;}
+  .foot-links li + li{margin-left:0;}
   .foot-links a{
     opacity:.85; text-decoration:none;
     font-family:'Inter', sans-serif;
