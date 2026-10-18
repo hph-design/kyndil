@@ -444,7 +444,8 @@
     flex-shrink:0;
   }
   .match-card[hidden]{display:none;}
-  .match-card.is-wide{grid-column:1 / -1;}
+  .match-card.is-wide{grid-column:1 / -1; justify-self:center; width:calc(50% - 12px);}
+  @media (max-width: 860px){ .match-card.is-wide{width:100%;} }
   .match-vs{color:#8a978f; font-size:.85rem; font-weight:600; font-family:'Inter', sans-serif;}
   .match-card p{margin:0; color:#4b5a52; font-size:.92rem;}
   .cta-band .cta-note{margin-top:32px; font-size:.85rem; color:#bcd8c9;}
