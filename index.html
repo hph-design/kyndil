@@ -443,6 +443,8 @@
     border-radius:50%; background:#fff; border:1px solid var(--line);
     flex-shrink:0;
   }
+  .match-card[hidden]{display:none;}
+  .match-card.is-wide{grid-column:1 / -1;}
   .match-vs{color:#8a978f; font-size:.85rem; font-weight:600; font-family:'Inter', sans-serif;}
   .match-card p{margin:0; color:#4b5a52; font-size:.92rem;}
   .cta-band .cta-note{margin-top:32px; font-size:.85rem; color:#bcd8c9;}
@@ -720,6 +722,12 @@
         <div class="match-teams" id="matchSmsTeams"><span class="match-loading">Heintar dystir…</span></div>
         <p id="matchSmsMeta"></p>
       </div>
+      <!-- Kyndil 2 í Faxe Kondi: kortið sæst bert, meðan liðið hevur komandi dyst, og hvørvur sjálvt, tá tey eru úr kappingini. -->
+      <div class="match-card is-wide" id="matchK2Card" hidden>
+        <span class="tag" id="matchK2Tag">Kyndil 2</span>
+        <div class="match-teams" id="matchK2Teams"><span class="match-loading">Heintar dystir…</span></div>
+        <p id="matchK2Meta"></p>
+      </div>
     </div>
     <p class="cta-note" id="matchesSourceNote">Kelda: <a href="https://dystir.hsf.fo/" target="_blank" rel="noopener">dystir.hsf.fo →</a></p>
   </div>
@@ -958,18 +966,20 @@
       'Kvinnur': 'Faxe Kondi · Kvinnur'
     };
 
-    async function loadNextMatch(compNames, teamsEl, metaEl, tagEl){
+    async function loadNextMatch(compNames, teamsEl, metaEl, tagEl, teamName, cardEl){
+      const team = teamName || 'Kyndil';
       try {
         const res = await fetch(`https://us-central1-hsf-production-505a6.cloudfunctions.net/webApi/clubs/${KYNDIL_CLUB_ID}/matches`);
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
         const now = Date.now() / 1000;
         const next = (data.matches || [])
-          .filter(m => compNames.includes(m.competitionName) && m.date && m.date._seconds > now
-            && (m.homeTeam.name === 'Kyndil' || m.awayTeam.name === 'Kyndil'))
+          .filter(m => (!compNames || compNames.includes(m.competitionName)) && m.date && m.date._seconds > now
+            && (m.homeTeam.name === team || m.awayTeam.name === team))
           .sort((a, b) => a.date._seconds - b.date._seconds)[0];
         if (!next) throw new Error('Eingin komandi dystur funnin');
-        if (tagEl && COMP_LABELS[next.competitionName]) tagEl.textContent = COMP_LABELS[next.competitionName];
+        if (tagEl && COMP_LABELS[next.competitionName]) tagEl.textContent = (team !== 'Kyndil' ? team + ' · ' : '') + COMP_LABELS[next.competitionName];
+        if (cardEl) cardEl.hidden = false;
         const logoUrl = (clubId) => `https://files.hsf.fo/clubs/${clubId}.webp`;
         teamsEl.innerHTML = `
           <span class="match-team"><img class="match-logo" src="${logoUrl(next.homeTeam.clubId)}" alt="${next.homeTeam.name} merki" onerror="this.style.visibility='hidden'"><span>${next.homeTeam.name}</span></span>
@@ -978,6 +988,7 @@
         `;
         metaEl.textContent = `${formatMatchDate(next.date._seconds)} kl. ${next.time} · ${next.venue.name}`;
       } catch (e) {
+        if (cardEl){ cardEl.hidden = true; return; }
         teamsEl.innerHTML = '<span class="match-loading">Kundi ikki heinta dystir beinleiðis</span>';
         metaEl.innerHTML = `<a href="https://dystir.hsf.fo/" target="_blank" rel="noopener">Sí dystirnar á dystir.hsf.fo →</a>`;
       }
@@ -986,6 +997,8 @@
     // Næsti dystur fyri A-liðini: Burn/SMS-deildin og Faxe Kondi kappingin (bert dystir hjá fyrsta liðnum, "Kyndil").
     loadNextMatch(['Burn menn', 'Menn'], burnTeams, burnMeta, document.getElementById('matchBurnTag'));
     loadNextMatch(['SMS kvinnur', 'Kvinnur'], smsTeams, smsMeta, document.getElementById('matchSmsTag'));
+    // Kyndil 2: næsti dystur í hvørjari kapping sum helst (í løtuni Faxe Kondi). Eingin komandi dystur = kortið verður fjalt.
+    loadNextMatch(null, document.getElementById('matchK2Teams'), document.getElementById('matchK2Meta'), document.getElementById('matchK2Tag'), 'Kyndil 2', document.getElementById('matchK2Card'));
   })();
 </script>
 
