@@ -711,12 +711,12 @@
     <h2>Komandi dystir</h2>
     <div class="next-matches" id="nextMatches">
       <div class="match-card">
-        <span class="tag">Burn Deildin · Menn</span>
+        <span class="tag" id="matchBurnTag">Burn Deildin · Menn</span>
         <div class="match-teams" id="matchBurnTeams"><span class="match-loading">Heintar dystir…</span></div>
         <p id="matchBurnMeta"></p>
       </div>
       <div class="match-card">
-        <span class="tag">SMS Deildin · Kvinnur</span>
+        <span class="tag" id="matchSmsTag">SMS Deildin · Kvinnur</span>
         <div class="match-teams" id="matchSmsTeams"><span class="match-loading">Heintar dystir…</span></div>
         <p id="matchSmsMeta"></p>
       </div>
@@ -950,16 +950,26 @@
       return `${dayNames[d.getUTCDay()]} ${d.getUTCDate()}. ${monthNames[d.getUTCMonth()]}`;
     }
 
-    async function loadNextMatch(compName, teamsEl, metaEl){
+    // Hvør kappingarnavn úr HSF hoyrir til hvønn "komandi dyst"-kort, og hvat standur á kortinum.
+    const COMP_LABELS = {
+      'Burn menn': 'Burn Deildin · Menn',
+      'SMS kvinnur': 'SMS Deildin · Kvinnur',
+      'Menn': 'Faxe Kondi · Menn',
+      'Kvinnur': 'Faxe Kondi · Kvinnur'
+    };
+
+    async function loadNextMatch(compNames, teamsEl, metaEl, tagEl){
       try {
         const res = await fetch(`https://us-central1-hsf-production-505a6.cloudfunctions.net/webApi/clubs/${KYNDIL_CLUB_ID}/matches`);
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
         const now = Date.now() / 1000;
         const next = (data.matches || [])
-          .filter(m => m.competitionName === compName && m.date && m.date._seconds > now)
+          .filter(m => compNames.includes(m.competitionName) && m.date && m.date._seconds > now
+            && (m.homeTeam.name === 'Kyndil' || m.awayTeam.name === 'Kyndil'))
           .sort((a, b) => a.date._seconds - b.date._seconds)[0];
         if (!next) throw new Error('Eingin komandi dystur funnin');
+        if (tagEl && COMP_LABELS[next.competitionName]) tagEl.textContent = COMP_LABELS[next.competitionName];
         const logoUrl = (clubId) => `https://files.hsf.fo/clubs/${clubId}.webp`;
         teamsEl.innerHTML = `
           <span class="match-team"><img class="match-logo" src="${logoUrl(next.homeTeam.clubId)}" alt="${next.homeTeam.name} merki" onerror="this.style.visibility='hidden'"><span>${next.homeTeam.name}</span></span>
@@ -973,8 +983,9 @@
       }
     }
 
-    loadNextMatch('Burn menn', burnTeams, burnMeta);
-    loadNextMatch('SMS kvinnur', smsTeams, smsMeta);
+    // Næsti dystur fyri A-liðini: Burn/SMS-deildin og Faxe Kondi kappingin (bert dystir hjá fyrsta liðnum, "Kyndil").
+    loadNextMatch(['Burn menn', 'Menn'], burnTeams, burnMeta, document.getElementById('matchBurnTag'));
+    loadNextMatch(['SMS kvinnur', 'Kvinnur'], smsTeams, smsMeta, document.getElementById('matchSmsTag'));
   })();
 </script>
 
