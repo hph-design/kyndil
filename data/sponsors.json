@@ -90,6 +90,7 @@
     },
     {
       "name": "Sport24",
+      "url": "https://skalkur.fo/",
       "logo": "assets/sponsors/sport24.png",
       "width": 200,
       "height": 200,
@@ -98,6 +99,7 @@
     },
     {
       "name": "Betri",
+      "url": "https://www.betri.fo/fo/betri",
       "logo": "assets/sponsors/betri.png",
       "width": 164,
       "height": 164,
@@ -106,6 +108,7 @@
     },
     {
       "name": "Nort",
+      "url": "https://nort.fo/",
       "logo": "assets/sponsors/nort.png",
       "width": 1651,
       "height": 848,
@@ -114,6 +117,7 @@
     },
     {
       "name": "Suðuroyar Sparikassi",
+      "url": "https://www.ss.fo/",
       "logo": "assets/sponsors/suduroyar-sparikassi.png",
       "width": 438,
       "height": 130,
@@ -122,6 +126,7 @@
     },
     {
       "name": "Reyni Service",
+      "url": "https://reyniservice.fo/",
       "logo": "assets/sponsors/reyni-service.png",
       "width": 339,
       "height": 60,
@@ -130,6 +135,7 @@
     },
     {
       "name": "Magn",
+      "url": "https://www.magn.fo/",
       "logo": "assets/sponsors/magn.png",
       "width": 578,
       "height": 172,
