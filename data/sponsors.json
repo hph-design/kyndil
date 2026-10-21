@@ -13,7 +13,7 @@
       "logo": "assets/sponsors/tasty.png",
       "width": 193,
       "height": 172,
-      "featured": true,
+      "featured": false,
       "order": 1
     },
     {
@@ -92,8 +92,8 @@
       "name": "Sport24",
       "url": "https://skalkur.fo/",
       "logo": "assets/sponsors/sport24.png",
-      "width": 200,
-      "height": 200,
+      "width": 749,
+      "height": 249,
       "featured": false,
       "order": 10
     },
