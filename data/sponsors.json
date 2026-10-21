@@ -18,6 +18,7 @@
     },
     {
       "name": "FTZ",
+      "url": "https://www.ftz.dk/afdelinger/torshavn/",
       "logo": "assets/sponsors/ftz.png",
       "width": 142,
       "height": 72,
@@ -26,6 +27,7 @@
     },
     {
       "name": "Articon",
+      "url": "https://www.articon.fo/",
       "logo": "assets/sponsors/articon.png",
       "width": 226,
       "height": 47,
@@ -33,7 +35,8 @@
       "order": 3
     },
     {
-      "name": "Balslev",
+      "name": "Bygma",
+      "url": "https://www.balslev.fo/",
       "logo": "assets/sponsors/balslev.png",
       "width": 244,
       "height": 85,
@@ -42,6 +45,7 @@
     },
     {
       "name": "Vestpack",
+      "url": "https://vestpack.fo/",
       "logo": "assets/sponsors/vestpack.png",
       "width": 580,
       "height": 100,
@@ -49,7 +53,8 @@
       "order": 5
     },
     {
-      "name": "Tannlæknastovan í Óðinshædd",
+      "name": "Tannlæknamiðstøðin",
+      "url": "https://www.tonn.fo/",
       "logo": "assets/sponsors/tannlaeknastovan-i-odinshaedd.png",
       "width": 678,
       "height": 165,
@@ -58,6 +63,7 @@
     },
     {
       "name": "Faroe Express",
+      "url": "https://www.faroeship.com",
       "logo": "assets/sponsors/faroe-express.png",
       "width": 569,
       "height": 165,
@@ -66,6 +72,7 @@
     },
     {
       "name": "Løvubetong",
+      "url": "https://www.betong.fo/",
       "logo": "assets/sponsors/lovubetong.png",
       "width": 156,
       "height": 198,
@@ -74,6 +81,7 @@
     },
     {
       "name": "Tatanka",
+      "url": "https://tatanka.fo/",
       "logo": "assets/sponsors/tatanka.png",
       "width": 190,
       "height": 70,
