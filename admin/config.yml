@@ -30,6 +30,7 @@ collections:
             fields:
               - { label: "Navn", name: "name", widget: "string" }
               - { label: "Logo (mynd)", name: "logo", widget: "image" }
+              - { label: "Heimasíða (leinki, t.d. https://www.dømi.fo)", name: "url", widget: "string", required: false }
               - { label: "Breidd (px)", name: "width", widget: "number", value_type: "int" }
               - { label: "Hædd (px)", name: "height", widget: "number", value_type: "int" }
               - { label: "Stórt/framhevja logo?", name: "featured", widget: "boolean", default: false }
