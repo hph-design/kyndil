@@ -37,10 +37,19 @@
             '<img width="' + s.width + '" height="' + s.height + '" src="' +
             s.logo + '" alt="' + escapeHtml(s.name) + '">';
 
+          // Hvert logo verður ein leinki, um ein heimasíða er løgd inn í CMS.
+          var link = img;
+          if (s.url && /^https?:\/\//i.test(s.url)) {
+            link =
+              '<a class="sponsor-link" href="' + escapeHtml(s.url) +
+              '" target="_blank" rel="noopener noreferrer" aria-label="' +
+              escapeHtml(s.name) + ' (opnar heimasíðuna)">' + img + "</a>";
+          }
+
           if (s.featured) {
-            featuredHtml += img;
+            featuredHtml += link;
           } else {
-            gridHtml += '<div class="sponsor-slot">' + img + "</div>\n      ";
+            gridHtml += '<div class="sponsor-slot">' + link + "</div>\n      ";
           }
         });
 
