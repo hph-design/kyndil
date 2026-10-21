@@ -141,6 +141,15 @@
       "height": 172,
       "featured": false,
       "order": 15
+    },
+    {
+      "name": "Landshandilin",
+      "url": "https://fo.landshandilin.fo/",
+      "logo": "assets/sponsors/landshandilin.png",
+      "width": 332,
+      "height": 154,
+      "featured": false,
+      "order": 16
     }
   ]
 }
